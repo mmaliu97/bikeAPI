@@ -34,34 +34,48 @@ function Form({ route, method }) {
                 navigate("/login")
             }
         } catch (error) {
-            alert(error)
+            console.error('Error:', error.response ? error.response.data : error.message);
+            if (error.response && error.response.status === 400) {
+                // Check if the error message indicates that the username already exists
+                if (error.response.data && error.response.data.username) {
+                    alert(`Username ${error.response.data.username[0]}`);
+                } else {
+                    alert("An error occurred during registration.");
+                }
+            } else {
+                alert("An error occurred. Please try again later.");
+            }
         } finally {
             setLoading(false)
         }
     };
 
     return (
-        <form onSubmit={handleSubmit} className="form-container">
-            <h1>{name}</h1>
-            <input
-                className="form-input"
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="Username"
-            />
-            <input
-                className="form-input"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
-            />
-            {loading && <LoadingIndicator />}
-            <button className="form-button" type="submit">
-                {name}
-            </button>
-        </form>
+        <div>
+            <form onSubmit={handleSubmit} className="form-container">
+                <h1>{name}</h1>
+                <input
+                    className="form-input"
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Username"
+                />
+                <input
+                    className="form-input"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Password"
+                />
+                {loading && <LoadingIndicator />}
+                <button className="form-button" type="submit">
+                    {name}
+                </button>
+                
+            </form>
+            
+        </div>
     );
 }
 

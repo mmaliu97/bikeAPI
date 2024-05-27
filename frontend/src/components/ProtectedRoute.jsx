@@ -2,11 +2,12 @@ import { Navigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import api from "../api";
 import { REFRESH_TOKEN, ACCESS_TOKEN } from "../constants";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 
 function ProtectedRoute({ children }) {
     const [isAuthorized, setIsAuthorized] = useState(null);
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         auth().catch(() => setIsAuthorized(false))
@@ -27,6 +28,8 @@ function ProtectedRoute({ children }) {
                 // try and get response, if successful (ie 200), set the refresh token to access token
                 localStorage.setItem(ACCESS_TOKEN, res.data.access)
                 setIsAuthorized(true)
+                await fetchUserData(res.data.access);
+
             } else {
                 setIsAuthorized(false)
             }
@@ -36,6 +39,21 @@ function ProtectedRoute({ children }) {
         }
     };
 
+
+    const fetchUserData = async (token) => {
+        try {
+            const res = await api.get("/api/user/", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            setUser(res.data);
+            console.log(res.data)
+        } catch (error) {
+            console.log(error);
+            setIsAuthorized(false);
+        }
+    };
     const auth = async () => {
 
         // check if user has access token
@@ -60,6 +78,8 @@ function ProtectedRoute({ children }) {
         } else {
             // if token is not, then authorization is true
             setIsAuthorized(true);
+            await fetchUserData(token);
+
         }
     };
 
@@ -68,7 +88,7 @@ function ProtectedRoute({ children }) {
     }
 
     // if authorized return children route, if not send user to the login
-    return isAuthorized ? children : <Navigate to="/login" />;
+    return isAuthorized ? React.cloneElement(children, { user }) : <Navigate to="/login" />;
 }
 
 export default ProtectedRoute;

@@ -1,8 +1,11 @@
-import react from "react"
+import React from "react"
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Home from "./pages/Home"
+import UpdateBikestop from "./pages/UpdateBikestop"
+import CreateBikestop from "./pages/CreateBikestop"
+
 import NotFound from "./pages/NotFound"
 import ProtectedRoute from "./components/ProtectedRoute"
 
@@ -29,6 +32,21 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/update/:id" element={
+            <ProtectedRoute> 
+              <UpdateBikestop />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+        path="/create" element={
+          <ProtectedRoute> 
+            <CreateBikestop />
+          </ProtectedRoute>
+        }
+      />
+
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/register" element={<RegisterAndLogout />} />

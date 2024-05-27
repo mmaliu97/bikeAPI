@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Note
+from .models import BikeStops
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -19,10 +19,19 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 
-class NoteSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Note
-        fields = ["id", "title", "content", "created_at", "author"]
+# class NoteSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Note
+#         fields = ["id", "title", "content", "created_at", "author"]
 
-        # can only see author not write it
+#         # can only see author not write it
+#         extra_kwargs = {"author": {"read_only": True}}
+
+class BikeSerializer(serializers.ModelSerializer):
+    author = UserSerializer(read_only=True)
+    class Meta:
+        model = BikeStops
+        fields = ["id", "capacity", "parking_type", "landmark", 
+                  "latitude","longitude","city_name","created_at", "author"]
+    # can only see author not write it
         extra_kwargs = {"author": {"read_only": True}}

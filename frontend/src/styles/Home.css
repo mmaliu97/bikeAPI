@@ -3,23 +3,27 @@ div {
     font-family: Arial, sans-serif;
   }
   
-  /* Styles for the notes section */
-  .notes-section {
+  /* Styles for the bikestops section */
+  .bikestops-section {
     margin-bottom: 2rem;
   }
   
-  .notes-section h2 {
+  .bikestops-section h2 {
     color: #333;
     font-size: 24px;
   }
   
-  /* Styles for individual notes - assuming your Note component has some container element */
-  .note {
+  /* Styles for individual bikestops - assuming your bikestop component has some container element */
+  .bikestop {
     background-color: #f9f9f9;
     border-left: 5px solid #007bff;
     margin: 10px 0;
     padding: 10px 15px;
     border-radius: 5px;
+  }
+
+  .bikestop:hover {
+    background-color: #0056b3;
   }
   
   /* Styles for the form section */
@@ -66,3 +70,78 @@ div {
   form input[type="submit"]:hover {
     background-color: #0056b3;
   }
+
+
+  .button-container {
+    display: flex;
+    justify-content: center; /* Horizontally center the button */
+    align-items: center;     /* Vertically center the button, if needed */
+    margin-bottom: 20px;     /* Add margin if necessary */
+}
+
+.main-button {
+    display: flex;
+    justify-content: center; /* Horizontally center the button */
+    align-items: center;     /* Vertically center the button, if needed */
+    margin-bottom: 20px;     /* Add margin if necessary */
+    background-color: #029c1c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+  .main-button:hover {
+    background-color: #026d14;
+  }
+
+  .header-container {
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center;     /* Vertically center (if needed) */
+    margin: 10px 0;          /* Add margin if needed */
+}
+
+  .header-container h2 {
+      margin: 0;               /* Reset any default margin */
+  }
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.image-item {
+    width: 100%; /* Adjust width as needed */
+}
+
+.image-item img {
+    width: 80%;
+    height: auto;
+}
+
+
+
+.text-above-image {
+  position: relative;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.8); /* Optional: Add background color to improve text readability */
+  padding: 10px; /* Optional: Add padding for better spacing */
+}
+
+.custom-dropdown {
+  /* Add your custom styles here */
+  width: 200px; /* Example: Set the width of the dropdown box */
+  padding: 10px 10px; /* Add more padding above and below the dropdown */
+  border: 1px solid #ccc; /* Example: Add a border */
+  border-radius: 5px; /* Example: Add border radius */
+  margin-bottom: 20px; /* Add margin below the dropdown */
+
+  background-color: #fff; /* Example: Set background color */
+  color: #333; /* Example: Set text color */
+  font-size: 16px; /* Example: Set font size */
+}

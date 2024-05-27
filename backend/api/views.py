@@ -1,20 +1,34 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework import generics
-from .serializers import UserSerializer, NoteSerializer
+from .serializers import UserSerializer, BikeSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from .models import Note
+from .models import BikeStops
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 
-class NoteListCreate(generics.ListCreateAPIView):
-    serializer_class = NoteSerializer
+class UserDetailView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def get_queryset(self):
-        user = self.request.user
-        return Note.objects.filter(author=user)
+    def get(self, request):
+        user = request.user
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+
+# Creating and Retrieving
+class BikeStopsListCreate(generics.ListCreateAPIView):
+    serializer_class = BikeSerializer
+    permission_classes = [IsAuthenticated]
+    # permission_classes = [AllowAny]
 
     # overwriting get_queryset
+    def get_queryset(self):
+
+        user = self.request.user
+        return BikeStops.objects.filter()
+
+    
     def perform_create(self, serializer):
         if serializer.is_valid():
             # serializer data saved into note automatically, author info has to be manually entered
@@ -22,14 +36,36 @@ class NoteListCreate(generics.ListCreateAPIView):
         else:
             print(serializer.errors)
 
-
-class NoteDelete(generics.DestroyAPIView):
-    serializer_class = NoteSerializer
+# Just GETTING bikestop
+class BikeStopRetrieve(generics.RetrieveAPIView):
+    serializer_class = BikeSerializer
     permission_classes = [IsAuthenticated]
+    lookup_field = 'pk'  # or 'pk' if you use the primary key field
 
     def get_queryset(self):
         user = self.request.user
-        return Note.objects.filter(author=user)
+        return BikeStops.objects.filter()
+
+# Delete functionality
+class BikeStopsDelete(generics.DestroyAPIView):
+    serializer_class = BikeSerializer
+    permission_classes = [IsAuthenticated]
+    # permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        user = self.request.user
+        return BikeStops.objects.filter(author=user)
+
+# Update functionality
+class BikeStopsUpdate(generics.UpdateAPIView):
+    serializer_class = BikeSerializer
+    permission_classes = [IsAuthenticated]
+    # permission_classes = [AllowAny]
+# 
+    def get_queryset(self):
+        user = self.request.user
+        return BikeStops.objects.filter(author=user)
+
 
 
 class CreateUserView(generics.CreateAPIView):
