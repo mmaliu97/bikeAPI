@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ACCESS_TOKEN } from "./constants";
 
-const apiUrl = "/choreoapis.dev/bikeapi/backend/rest-api-be2/v1.0";
+const apiUrl = "/choreo-apis/bike-api-2/backend-ixj/v1";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL : apiUrl,

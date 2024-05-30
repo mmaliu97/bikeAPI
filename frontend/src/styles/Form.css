@@ -48,7 +48,7 @@
     padding: 10px;
     margin: 10px 0;
     background-color: #007bff;
-    color: white;
+    color: black;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -57,4 +57,5 @@
 
 button:hover {
     background-color: #0056b3;
+    color: rgb(255, 252, 252);
 }
