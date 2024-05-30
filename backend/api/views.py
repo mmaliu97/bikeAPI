@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import BikeStops
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import status
 
 
 class UserDetailView(APIView):
@@ -76,6 +77,9 @@ class CreateUserView(generics.CreateAPIView):
 
     # accept user class info, ie username and pw
     serializer_class = UserSerializer
-
+    print(serializer_class)
     # allow any, to include non users and let them create their account
     permission_classes = [AllowAny]
+
+    def get(self, request, *args, **kwargs):
+        return Response({"message": "To create a new user, please send a POST request with the required data."}, status=status.HTTP_200_OK)
