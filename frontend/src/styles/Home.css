@@ -96,6 +96,24 @@ div {
     background-color: #026d14;
   }
 
+  .logout-button {
+    display: flex;
+    justify-content: center; /* Horizontally center the button */
+    align-items: center;     /* Vertically center the button, if needed */
+    margin-bottom: 20px;     /* Add margin if necessary */
+    background-color: #0602eee1;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+  .logout-button:hover {
+    background-color: #04019ee1;
+  }
+
+
   .header-container {
     display: flex;
     justify-content: center; /* Horizontally center */

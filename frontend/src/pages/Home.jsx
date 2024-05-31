@@ -80,6 +80,10 @@ function Home({ user }) {
         navigate(`/update/${id}`);
     };
 
+    const handleLogout = () => {
+        navigate('/logout'); // Navigate to the main page
+    };
+
     const deleteNote = (id) => {
         api
             .delete(`/api/bikestops/delete/${id}/`)
@@ -150,6 +154,9 @@ function Home({ user }) {
                     </Marker>
                 ))}
             </MapContainer>
+            <button className="logout-button" onClick={() => handleLogout()}>
+                Main Page
+            </button>
         </div>
     );
 }
