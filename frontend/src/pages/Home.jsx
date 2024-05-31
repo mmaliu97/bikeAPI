@@ -104,6 +104,8 @@ function Home({ user }) {
             <button className="main-button" onClick={handleCreate}>
                 Create Bikestop
             </button>
+
+            
             <MapContainer center={userCoordinates || [30.26666, -97.7333]} zoom={13} style={{ height: "600px", width: "100%" }}>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -155,10 +157,12 @@ function Home({ user }) {
                 ))}
             </MapContainer>
             <button className="logout-button" onClick={() => handleLogout()}>
-                Main Page
+                Logout
             </button>
         </div>
+        
     );
+    
 }
 
 export default Home;
