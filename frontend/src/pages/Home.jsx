@@ -23,6 +23,8 @@ const SetViewOnChange = ({ coords }) => {
 
     useEffect(() => {
         if (firstRenderRef.current && coords) {
+            document.title = "Home"; 
+
             map.setView(coords, 13); // Adjust zoom level as needed
             firstRenderRef.current = false;
         }
@@ -99,7 +101,11 @@ function Home({ user }) {
     };
 
     return (
+        
         <div>
+        <header>
+            <h1>New Website Title</h1>
+        </header>
             <h2>Bike Parking Locations</h2>
             <button className="main-button" onClick={handleCreate}>
                 Create Bikestop

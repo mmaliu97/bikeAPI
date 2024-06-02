@@ -14,6 +14,7 @@ function UpdateBikestop() {
     const [bikestop, setBikestop] = useState(null);
 
     useEffect(() => {
+        document.title = "Update Bikestop"; 
         api.get(`/api/bikestops/${id}/`)
             .then((res) => setBikestop(res.data))
             .catch((err) => alert(err));

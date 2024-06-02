@@ -20,6 +20,8 @@ function CreateBikestop() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        document.title = "Create Bikestop"; // Set the tab title to "Create Bikestop"
+
         const storedLatitude = localStorage.getItem("userLatitude");
         const storedLongitude = localStorage.getItem("userLongitude");
 
