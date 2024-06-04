@@ -13,11 +13,20 @@ function Login() {
     return (
         <div>
             <Form route="/api/token/" method="login" />
+            
+            <div className="centered-text">
+            <p>Just browsing? Feel free to use the default user credentials </p>
+            <p>Username: defaultuser </p>
+            <p>Password: password</p>
+            </div>
+
             <div className="button-container"> {/* Add button container */}
                 <button onClick={() => navigate("/register")}>
-                    No account? Click here to register
+                No account? Click here to register
                 </button>
             </div>
+                
+      
         </div>
     );
 }
