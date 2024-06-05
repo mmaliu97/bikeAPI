@@ -103,9 +103,6 @@ function Home({ user }) {
     return (
         
         <div>
-        <header>
-            <h1>New Website Title</h1>
-        </header>
             <h2>Bike Parking Locations</h2>
             <button className="main-button" onClick={handleCreate}>
                 Create Bikestop
