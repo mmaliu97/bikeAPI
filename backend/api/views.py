@@ -47,27 +47,30 @@ class BikeStopRetrieve(generics.RetrieveAPIView):
         user = self.request.user
         return BikeStops.objects.filter()
 
+
 # Delete functionality
 class BikeStopsDelete(generics.DestroyAPIView):
     serializer_class = BikeSerializer
     permission_classes = [IsAuthenticated]
-    # permission_classes = [AllowAny]
 
     def get_queryset(self):
         user = self.request.user
+        # Allow superuser to delete any object, otherwise filter by author
+        if user.is_superuser:
+            return BikeStops.objects.all()
         return BikeStops.objects.filter(author=user)
 
 # Update functionality
 class BikeStopsUpdate(generics.UpdateAPIView):
     serializer_class = BikeSerializer
     permission_classes = [IsAuthenticated]
-    # permission_classes = [AllowAny]
-# 
+
     def get_queryset(self):
         user = self.request.user
+        # Allow superuser to update any object, otherwise filter by author
+        if user.is_superuser:
+            return BikeStops.objects.all()
         return BikeStops.objects.filter(author=user)
-
-
 
 class CreateUserView(generics.CreateAPIView):
     # built in view from django
